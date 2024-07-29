@@ -39,7 +39,8 @@ class _UpdatestudentState extends State<Updatestudent> {
       batch: batchController.text,
       imageUrl: widget.student.imageUrl,
     );
-    await _studentService.updateStudent(widget.student.id, updatedStudent, _profilePicture);
+    await _studentService.updateStudent(
+        widget.student.id, updatedStudent, _profilePicture);
   }
 
   Future<void> _pickImage() async {
@@ -63,10 +64,17 @@ class _UpdatestudentState extends State<Updatestudent> {
           const SizedBox(height: 20),
           Center(
             child: _profilePicture != null
-                ? CircleAvatar(radius: 60, backgroundImage: MemoryImage(_profilePicture!))
-                : widget.student.imageUrl != null && widget.student.imageUrl!.isNotEmpty
-                    ? CircleAvatar(radius: 60, backgroundImage: NetworkImage(widget.student.imageUrl!))
-                    : const CircleAvatar(radius: 60, backgroundImage: AssetImage('assets/img/default-profile-picture1.jpg')),
+                ? CircleAvatar(
+                    radius: 60, backgroundImage: MemoryImage(_profilePicture!))
+                : widget.student.imageUrl != null &&
+                        widget.student.imageUrl!.isNotEmpty
+                    ? CircleAvatar(
+                        radius: 60,
+                        backgroundImage: NetworkImage(widget.student.imageUrl!))
+                    : const CircleAvatar(
+                        radius: 60,
+                        backgroundImage: AssetImage(
+                            'assets/img/default-profile-picture1.jpg')),
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
@@ -134,6 +142,7 @@ class _UpdatestudentState extends State<Updatestudent> {
                     onPressed: () {
                       updateStudent();
                       Navigator.pop(context);
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Updated Successfully')));
                     },
                     child: const Text('Update'),
                   ),

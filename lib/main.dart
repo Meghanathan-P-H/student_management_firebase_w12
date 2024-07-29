@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
       title: "Student Management",
       theme: ThemeData(primaryColor: Colors.blue),
       home: const Homescreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
