@@ -19,7 +19,7 @@ class Student {
     
   });
 
-  // Factory method to create a Student from a Firestore document
+ 
   factory Student.fromDocument(DocumentSnapshot doc) {
     return Student(
       id: doc.id,
@@ -32,7 +32,7 @@ class Student {
     );
   }
 
-  // Method to convert a Student to a map for Firestore
+  
   Map<String, dynamic> toJson() {
     return {
       'id': id,

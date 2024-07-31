@@ -61,12 +61,12 @@ class StudentService {
         String imageUrl = student.imageUrl ?? '';
 
         if (imageUrl.isNotEmpty) {
-          // Delete the image from Firebase Storage
+          // Delete the image Firebase Storage///
           Reference imageRef = _storage.refFromURL(imageUrl);
           await imageRef.delete();
         }
 
-        // Delete the student document from Firestore
+        // Delete the student document Firestore////
         await studentsCollection.doc(id).delete();
       }
     } catch (e) {
