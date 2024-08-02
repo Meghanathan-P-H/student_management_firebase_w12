@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker_web/image_picker_web.dart';
 import 'package:std_management/functions/firebase_service.dart';
 import 'package:std_management/model/std_model.dart';
@@ -52,8 +53,12 @@ class _AddstudentState extends State<Addstudent> {
           const SizedBox(height: 20),
           Center(
             child: _profilePicture != null
-                ? CircleAvatar(radius: 60, backgroundImage: MemoryImage(_profilePicture!))
-                : const CircleAvatar(radius: 60, backgroundImage: AssetImage('assets/img/default-profile-picture1.jpg')),
+                ? CircleAvatar(
+                    radius: 60, backgroundImage: MemoryImage(_profilePicture!))
+                : const CircleAvatar(
+                    radius: 60,
+                    backgroundImage:
+                        AssetImage('assets/img/default-profile-picture1.jpg')),
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
@@ -74,9 +79,15 @@ class _AddstudentState extends State<Addstudent> {
                     controller: ageController,
                     decoration: const InputDecoration(labelText: 'Age'),
                     keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.digitsOnly,
+                    ],
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please enter age';
+                      }
+                      if (int.tryParse(value) == null) {
+                        return 'Please enter a valid integer';
                       }
                       return null;
                     },
@@ -133,4 +144,3 @@ class _AddstudentState extends State<Addstudent> {
     );
   }
 }
-
